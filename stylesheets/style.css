@@ -1,5 +1,5 @@
 body{
-  background: #fff;
+  background: #202020;
 }
 strong {
   font-weight: 600;
@@ -9,7 +9,7 @@ strong {
  margin-bottom: 100px;
  margin-left: 10%;
  font-family: 'Mukta', sans-serif, 'Helvetica';
- color: #4A4A4A;
+ color: #E7E7E7;
 }
 #content {
   padding-top: 5px;
@@ -148,7 +148,7 @@ ul.menu li.social a{
   /*color: #F06050;*/
       color: #008375;
 }
-#link-travel:hover, .active-Adventures {
+#link-pictures:hover, .active-Pictures {
   /*color: #F7CD1F;*/
       color: #008375;
 }
@@ -161,7 +161,7 @@ ul.menu li.social a{
 }
 a {
   text-decoration: none;
-  color: #4A4A4A;
+  color: #DDDDDD;
 }
 a.link-text {
   color: #008375;
