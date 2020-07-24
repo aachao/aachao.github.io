@@ -1,1 +1,51 @@
-Hello World
+# Getting started
+
+Install [vagrant][3] and [virtualbox][4].
+
+You also need to acquire `instantclient-basic-linux.x64-11.2.0.4.0.zip` and `instantclient-sdk-linux.x64-11.2.0.4.0.zip` [from the oracle website][1] and make sure they are in this directory before you run `vagrant up`. 
+
+For more information about working with ansible in vagrant, check out [the documentation from ansible][2].
+
+# Build the core services "locally" with vagrant!
+
+
+
+That will take a bit of time the first time, but the python dependencies are cached on your workstation, so after that it will be quicker.
+
+Other than that, `vagrant up` will stand up everything you need for the core web services, including a handful of quality-of-life aliases for the vagrant user. 
+
+```bash
+alias accountsvc="cd /instabase/core-services/account-tservice"
+alias filesvc="source /vagrant/venv2/bin/activate;cd /instabase/core-services/file-tservice"
+alias mountsvc="cd /instabase/core-services/mount-tservice"
+alias reposvc="cd /instabase/core-services/repo-tservice"
+alias tablesvc="source /vagrant/venv2/bin/activate;cd /instabase/core-services/table-tservice/"
+```
+
+After the `vagrant up` completes, you can run `vagrant ssh` to log in to the ubuntu box, and then pick a service to `make build runlocal`.
+
+## Example
+
+```bash
+vagrant up # Brings up the vagrant instance and all of that configuration managed goodness!
+vagrant ssh # logs you in to your local ubuntu VM
+tablesvc # Activates your python 2 virtual environment, and puts in you the right directory!
+make build runlocal # compiles all the things for the table service and then runs it on the vagrant box
+```
+
+# TODO
+- [ ] create convenience aliases for the remaining core services
+- [X] Move the pyenv home to `/vagrant` so it can also persist across rebuilds: Won't be supported by virtualbox, 3.6.8 requires hardlinks to build
+- [ ] Add the task services
+- [ ] Integrate with dependency management
+- [ ] Look for other opportunities to pre-compile artifacts and binaries for quicker provisioning
+
+# Provisioner.py compatibility work
+- [X] node.js
+- [X] docker.io
+- [X] gcloud
+
+[1]: https://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html
+[2]: https://docs.ansible.com/ansible/latest/scenario_guides/guide_vagrant.html
+[3]: https://www.vagrantup.com/downloads.html
+[4]: https://www.virtualbox.org/wiki/Downloads
