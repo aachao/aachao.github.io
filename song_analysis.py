@@ -2,8 +2,9 @@ import requests
 import json
 import datetime
 import dateutil.parser
+import time
 
-token = 'BQBzsIarGNN3cEdSqf4YuexCCNSitYCUukr_9pIduN4x-ir7srhrxA4CDeR1_RSom8tWwX3eAuyVlcqAUP3CDgtXBXCWSKfYAckCA94a3xhvpZHefed1vu0pgQkuCU5DMGu_ceMvnce0FywAMYadfcubtz_lOA'
+token = 'BQDVr_6EsjNWoqRWqtw2kvNnxx5mcK4QtVGv39UZVTfxlv16Tv0l1fD0R25r4BtQzKNXujD8o4tCGqCxrds9wgM0FecUSnZzmPJGesIW61CgdW03KOPMjWqAWSjbwj8s4EhWdWYcdvyEsKwzSzW6eRQoJG_p-w'
 
 headers = {
   'Authorization': 'Bearer {0}'.format(token),
@@ -15,9 +16,9 @@ next_url = 'https://api.spotify.com/v1/me/tracks?limit=50'
 
 while next_url:
 	resp = requests.get(next_url, headers=headers).json()
-	songs.extend(resp["items"])
+	songs.extend(resp['items'])
 	print(len(songs))
-	next_url = resp["next"]
+	next_url = resp['next']
 
 songs_by_month = dict()
 
@@ -33,18 +34,67 @@ for song in songs:
 # for k in songs_by_month:
 # 	print(len(songs_by_month[k]))
 
-popular_song_by_month = dict()
+# popular_song_by_month = dict()
 
-for k in songs_by_month:
+# for k in songs_by_month:
+# 	songs = songs_by_month[k]
+# 	cur_popularity = 0
+# 	for song in songs:
+# 		if song['track']['popularity'] > cur_popularity:
+# 			popular_song_by_month[k] = song
+# 			cur_popularity = song['track']['popularity']
+
+# for k in popular_song_by_month:
+# 	print(popular_song_by_month[k]['track']['name'])
+
+genre_count_for_period = dict()
+genre_to_artists = dict()
+for k in ['1-2019', '2-2019', '12-2018']:
+	genre_count = dict()
 	songs = songs_by_month[k]
-	cur_popularity = 0
 	for song in songs:
-		if song['track']['popularity'] > cur_popularity:
-			popular_song_by_month[k] = song
-			cur_popularity = song['track']['popularity']
+		print(song['track']['name'])
 
-for k in popular_song_by_month:
-	print(popular_song_by_month[k]['track']['name'])
+		# Get genres for track
+		genres = set()
+		for artist in song['track']['artists']:
+			token = 'BQBsq8PiIt_tJn9zmrd2buFTbq57F9Ff6xr1JebAAzm5TrRR3gP22ssEF9P1ub_YoKUa05CDFThB_A7WLEyrI5iCYuCsGlftqwEHHiA3_3cP4GF8eAmtf-xq5QH9Ia-cJo22DFCOD3PYSBhjjd5C6Uh9CA9Dvw'
+			headers = {
+			  'Authorization': 'Bearer {0}'.format(token),
+			  'Content-Type': 'application/json'
+			}
+
+			resp = requests.get('https://api.spotify.com/v1/artists/' + artist['id'], headers=headers).json()
+			if 'genres' not in resp:
+				time.sleep(10)
+				resp = requests.get('https://api.spotify.com/v1/artists/' + artist['id'], headers=headers).json()
+			for genre in resp['genres']:
+				genres.add(genre)
+				if genre not in genre_to_artists:
+					genre_to_artists[genre] = set()
+				genre_to_artists[genre].add(artist['name'])
+
+        # Update genre counters
+		for genre in genres:
+			if genre in genre_count_for_period:
+				genre_count_for_period[genre] += 1
+			else:
+				genre_count_for_period[genre] = 1
+
+# print(k)
+# print(genre_count)
+sorted_genre_count = sorted(genre_count_for_period.items(), key=lambda x: x[1], reverse=True)
+print(sorted_genre_count)
+import pdb
+pdb.set_trace()
+# print(genre_to_artists['post-teen pop'])
+# print(genre_to_artists)
+
+
+
+
+
+
 
 
 
