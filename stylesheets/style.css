@@ -4,6 +4,12 @@ body{
 strong {
   font-weight: 600;
 }
+
+
+
+
+
+
 #page-wrap {
  margin: 130px auto;
  margin-bottom: 100px;
@@ -20,6 +26,35 @@ strong {
   margin-bottom: 20px;
   max-width: 700px;
 }
+
+/* Fixed sidenav, full height */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Style the sidenav links and the dropdown button */
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  /*text-decoration: none;*/
+  /*font-size: 20px;*/
+  /*color: #818181;*/
+  display: block;
+  border: none;
+  /*background: none;*/
+  width: 100%;
+  text-align: right;
+  cursor: pointer;
+  outline: none;
+}
+
 
 #padding-top {
   padding-top: 20px;
@@ -45,7 +80,7 @@ strong {
   float: left;
   overflow: hidden;
   min-width: 280px;
-  max-width: 640px;
+  max-width: 200px;
   max-height: 500px;
   width: 48%;
   height: auto;
@@ -57,7 +92,7 @@ strong {
   float: left;
   overflow: hidden;
   min-width: 280px;
-  max-width: 640px;
+  max-width: 200px;
   max-height: 500px;
   width: 48%;
   height: auto;
@@ -66,7 +101,7 @@ strong {
 }
 .img-blog {
   min-width: 280px;
-  max-width: 640px;
+  /*max-width: 640px;*/
   max-height: 500px;
   margin: 1.5em 0 1em;
 }
@@ -114,6 +149,7 @@ ul.menu {
   font-weight: 600;
   letter-spacing: .5px;
   margin: 5px 0 0;
+  display: block;
 }
 
 ul.menu li {
@@ -121,7 +157,7 @@ ul.menu li {
 }
 
 li.social a{
-  margin-right: 5px;
+  /*margin-right: 5px;*/
 }
 
 
@@ -134,7 +170,7 @@ ul.menu {
 }
 
 ul.menu li {
-  display: inline;
+  /*display: inline;*/
   margin: 0 8px 24px;
 }
 

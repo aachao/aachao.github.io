@@ -30,22 +30,6 @@ for song in songs:
 	else:
 		songs_by_month[month] = [song]
 
-# print(len(songs_by_month))
-# for k in songs_by_month:
-# 	print(len(songs_by_month[k]))
-
-# popular_song_by_month = dict()
-
-# for k in songs_by_month:
-# 	songs = songs_by_month[k]
-# 	cur_popularity = 0
-# 	for song in songs:
-# 		if song['track']['popularity'] > cur_popularity:
-# 			popular_song_by_month[k] = song
-# 			cur_popularity = song['track']['popularity']
-
-# for k in popular_song_by_month:
-# 	print(popular_song_by_month[k]['track']['name'])
 
 genre_count_for_period = dict()
 genre_to_artists = dict()
@@ -81,8 +65,6 @@ for k in ['1-2019', '2-2019', '12-2018']:
 			else:
 				genre_count_for_period[genre] = 1
 
-# print(k)
-# print(genre_count)
 sorted_genre_count = sorted(genre_count_for_period.items(), key=lambda x: x[1], reverse=True)
 print(sorted_genre_count)
 import pdb
